@@ -45,31 +45,6 @@ ROW_NUMBER(), and PARTITION BY**.
 
 ------------------------------------------------------------------------
 
-## 📊 Dataset
-
-**Dataset:** `ecommerce_sales_1500_rows.csv`
-
-**Records:** 1,500
-
-### Columns
-
-  Column               Description
-  -------------------- -------------------------
-  `Order_ID`           Unique order identifier
-  `Order_Date`         Date of the order
-  `Customer_Name`      Customer name
-  `City`               Customer city
-  `Category`           Product category
-  `Product`            Product name
-  `Quantity`           Units purchased
-  `Unit_Price`         Price per unit
-  `Discount_Percent`   Discount applied
-  `Total_Amount`       Final order amount
-  `Payment_Method`     Payment method
-  `Order_Status`       Order status
-
-------------------------------------------------------------------------
-
 ## 🧰 Tools & Technologies
 
 -   **MySQL**
@@ -93,64 +68,6 @@ ecommerce-sql-project/
 ├── README.md
 ├── ecommerce_sales_analysis_project.sql
 └── ecommerce_sales_1500_rows.csv
-```
-
-------------------------------------------------------------------------
-
-## 🚀 How to Run
-
-### 1. Clone the repository
-
-``` bash
-git clone https://github.com/YOUR-USERNAME/ecommerce-sql-project.git
-cd ecommerce-sql-project
-```
-
-### 2. Open MySQL Workbench
-
-Open:
-
-``` text
-ecommerce_sales_analysis_project.sql
-```
-
-### 3. Create the database
-
-The SQL script contains:
-
-``` sql
-CREATE DATABASE ecommerce_project;
-USE ecommerce_project;
-```
-
-### 4. Create the table
-
-Run the `CREATE TABLE ecommerce_sales` section.
-
-### 5. Import the CSV
-
-In MySQL Workbench:
-
-``` text
-Schemas
-→ ecommerce_project
-→ Tables
-→ Right Click
-→ Table Data Import Wizard
-→ Select ecommerce_sales_1500_rows.csv
-```
-
-### 6. Verify the data
-
-``` sql
-SELECT COUNT(*) AS Total_Rows
-FROM ecommerce_sales;
-```
-
-Expected:
-
-``` text
-1500
 ```
 
 ------------------------------------------------------------------------
@@ -203,83 +120,6 @@ The project answers questions such as:
 
 ------------------------------------------------------------------------
 
-## ⭐ Featured SQL Examples
-
-### Top 10 Products by Revenue
-
-``` sql
-SELECT
-    Product,
-    SUM(Total_Amount) AS Total_Sales
-FROM ecommerce_sales
-WHERE Order_Status = 'Completed'
-GROUP BY Product
-ORDER BY Total_Sales DESC
-LIMIT 10;
-```
-
-### Loyal Customers
-
-``` sql
-SELECT
-    Customer_Name,
-    COUNT(*) AS Total_Orders,
-    SUM(Total_Amount) AS Total_Spent
-FROM ecommerce_sales
-WHERE Order_Status = 'Completed'
-GROUP BY Customer_Name
-HAVING COUNT(*) >= 3
-ORDER BY Total_Spent DESC;
-```
-
-### Product Ranking
-
-``` sql
-SELECT
-    Product,
-    SUM(Total_Amount) AS Total_Sales,
-    RANK() OVER (
-        ORDER BY SUM(Total_Amount) DESC
-    ) AS Sales_Rank
-FROM ecommerce_sales
-WHERE Order_Status = 'Completed'
-GROUP BY Product
-ORDER BY Sales_Rank;
-```
-
-### Top Product in Each City
-
-``` sql
-WITH city_product_sales AS (
-    SELECT
-        City,
-        Product,
-        SUM(Total_Amount) AS Total_Sales
-    FROM ecommerce_sales
-    WHERE Order_Status = 'Completed'
-    GROUP BY City, Product
-),
-ranked_products AS (
-    SELECT
-        City,
-        Product,
-        Total_Sales,
-        ROW_NUMBER() OVER (
-            PARTITION BY City
-            ORDER BY Total_Sales DESC
-        ) AS Product_Rank
-    FROM city_product_sales
-)
-SELECT
-    City,
-    Product,
-    Total_Sales
-FROM ranked_products
-WHERE Product_Rank = 1;
-```
-
-------------------------------------------------------------------------
-
 ## 📈 Business Value
 
 This analysis can help an e-commerce business:
@@ -309,24 +149,9 @@ Through this project, I practiced:
 -   Ranking and partitioning.
 -   Turning raw data into meaningful insights.
 
-------------------------------------------------------------------------
-
-## 🔮 Future Improvements
-
-Possible next steps:
-
--   Build a **Power BI dashboard**.
--   Add interactive sales visualizations.
--   Create customer segmentation.
--   Add profit and cost columns.
--   Perform monthly growth analysis.
--   Add advanced KPI calculations.
-
-------------------------------------------------------------------------
-
 ## 👨‍💻 Author
 
-**Your Name**
+**SUJEET PANDAGRE**
 
 > SQL Data Analysis Project --- E-Commerce Sales
 
@@ -334,6 +159,4 @@ If you found this project useful, consider giving the repository a ⭐.
 
 ------------------------------------------------------------------------
 
-## 📜 License
 
-This project is intended for educational and portfolio purposes.
